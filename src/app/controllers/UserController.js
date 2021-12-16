@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import User from '../models/User';
+import File from '../models/File';
 
 class UserController {
     async store(req, res) {
@@ -46,7 +47,7 @@ class UserController {
                 .when('old_password', (old_password, field) =>
                     old_password ? field.required() : field
                 ),
-                confirm_password:Yup.string()
+            confirm_password:Yup.string()
                 .when('password', (password, field) =>
                 password ? field.required().oneOf([Yup.ref('password')]) : field
                 ),
@@ -79,6 +80,21 @@ class UserController {
             email,
             provider
         });
+    }
+
+    async index(req, res){
+        const user_list = await User.findAll({
+            attributes: ['id', 'name', 'email', 'avatar_id', 'provider'],
+            include: [
+                {
+                    model: File,
+                    as: 'avatar',
+                    attributes: ['name', 'path', 'url'],
+                },
+            ],
+        });
+
+    return res.json(user_list)
     }
 }
 
