@@ -9,29 +9,29 @@ module.exports = {
         },
         name: {
             type: Sequelize.STRING,
-            allowNull:false,
+            allowNull: false,
         },
         email: {
             type: Sequelize.STRING,
-            allowNull:false,
+            allowNull: false,
             unique: true,
         },
         password_hash: {
             type: Sequelize.STRING,
-            allowNull:false,
+            allowNull: false,
         },
         provider: {
             type: Sequelize.BOOLEAN,
             defaultValue: false,
-            allowNull:false,
+            allowNull: false,
         },
         created_at:{
-            allowNull: false,
             type: Sequelize.DATE,
+            allowNull: false,
         },
         updated_at:{
-            allowNull: false,
             type: Sequelize.DATE,
+            allowNull: false,
         },
     });
   },
