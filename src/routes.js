@@ -11,6 +11,7 @@ import AppointmentController from './app/controllers/AppointmentController'
 
 import authMiddleware from './app/middleware/auth'
 import Appointment from './app/models/Appointment';
+import ScheduleController from './app/controllers/ScheduleController';
 
 const routes = new Router();
 const upload = multer(multerConfig);
@@ -26,7 +27,7 @@ routes.post('/appointments', AppointmentController.store)
 routes.get('/appointments', AppointmentController.index)
 routes.get('/users', UserController.index);
 routes.get('/providers', ProviderController.index);
-
+routes.get('/schedule', ScheduleController.index);
 /* PUT ROUTES */
 routes.put('/users', UserController.update);
 
