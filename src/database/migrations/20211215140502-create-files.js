@@ -1,6 +1,6 @@
 module.exports = {
-    up: async (queryInterface, Sequelize) => {
-        return queryInterface.createTable('files', {
+    up: async (queryInterface, Sequelize) =>
+        queryInterface.createTable('files', {
             id: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
@@ -9,25 +9,22 @@ module.exports = {
             },
             name: {
                 type: Sequelize.STRING,
-                allowNull:false,
+                allowNull: false,
             },
             path: {
                 type: Sequelize.STRING,
-                allowNull:false,
+                allowNull: false,
                 unique: true,
             },
-            created_at:{
+            created_at: {
                 allowNull: false,
                 type: Sequelize.DATE,
             },
-            updated_at:{
+            updated_at: {
                 allowNull: false,
                 type: Sequelize.DATE,
             },
-      });
-    },
+        }),
 
-    down: async (queryInterface) => {
-      return queryInterface.dropTable('files');
-    }
-  };
+    down: async (queryInterface) => queryInterface.dropTable('files'),
+};

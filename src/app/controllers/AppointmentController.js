@@ -5,13 +5,13 @@ import File from '../models/File';
 import Appointment from '../models/Appointment';
 
 class AppointmentController {
-    async index (req, res) {
+    async index(req, res) {
         const { page = 1 } = req.query;
 
         const appointments = await Appointment.findAll({
             where: { user_id: req.userId, canceled_at: null },
             order: ['date'],
-            attributes: [ 'id', 'date' ],
+            attributes: ['id', 'date'],
             limit: 20,
             offset: (page - 1) * 20,
             include: [
@@ -40,14 +40,12 @@ class AppointmentController {
         });
 
         if (!(await schema.isValid(req.body))) {
-            return res
-            .status(400)
-            .json({ error: 'Validation has failed!' });
+            return res.status(400).json({ error: 'Validation has failed!' });
         }
 
         const { provider_id, date } = req.body;
 
-        /* Check if provider_id is a provider*/
+        /* Check if provider_id is a provider */
         const checkIsProvider = await User.findOne({
             where: {
                 id: provider_id,
@@ -55,25 +53,25 @@ class AppointmentController {
             },
         });
 
-        /* Check if date is available*/
-        if (!checkIsProvider){
-            return res
-            .status(401)
-            .json({ error: 'You can only create appointment with providers.'});
+        /* Check if date is available */
+        if (!checkIsProvider) {
+            return res.status(401).json({
+                error: 'You can only create appointment with providers.',
+            });
         }
 
         /* Check for past dates */
         const hourStart = startOfHour(parseISO(date));
 
-        if (isBefore(hourStart, new Date())){
+        if (isBefore(hourStart, new Date())) {
             return res
-            .status(400)
-            .json({ error: 'Past dates are not permitted!' });
+                .status(400)
+                .json({ error: 'Past dates are not permitted!' });
         }
 
-        /* Check date availability*/
+        /* Check date availability */
 
-        const checkAvailability= await Appointment.findOne({
+        const checkAvailability = await Appointment.findOne({
             where: {
                 provider_id,
                 canceled_at: null,
@@ -83,9 +81,8 @@ class AppointmentController {
 
         if (checkAvailability) {
             return res
-            .status(400)
-            .json({ error: 'Appointment date is not available!' });
-
+                .status(400)
+                .json({ error: 'Appointment date is not available!' });
         }
 
         const appointment = await Appointment.create({
