@@ -15,16 +15,19 @@ import Appointment from './app/models/Appointment';
 const routes = new Router();
 const upload = multer(multerConfig);
 
-
+/* POST ROUTES */
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
 routes.use(authMiddleware);
 routes.post('/files', upload.single('file'), FileController.store);
 routes.post('/appointments', AppointmentController.store)
 
-routes.put('/users', UserController.update);
-
+/* GET ROUTES */
+routes.get('/appointments', AppointmentController.index)
 routes.get('/users', UserController.index);
 routes.get('/providers', ProviderController.index);
+
+/* PUT ROUTES */
+routes.put('/users', UserController.update);
 
 export default routes;
