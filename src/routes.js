@@ -31,5 +31,6 @@ routes.get('/notifications', NotificationController.index);
 
 /* PUT ROUTES */
 routes.put('/users', UserController.update);
+routes.put('/notifications/:id', NotificationController.update);
 
 export default routes;
