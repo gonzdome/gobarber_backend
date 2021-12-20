@@ -33,4 +33,7 @@ routes.get('/notifications', NotificationController.index);
 routes.put('/users', UserController.update);
 routes.put('/notifications/:id', NotificationController.update);
 
+/* DELETE ROUTES */
+routes.delete('/appointments/:id', AppointmentController.delete);
+
 export default routes;
