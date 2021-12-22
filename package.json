@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@sentry/node": "^6.16.1",
+    "@sentry/tracing": "^6.16.1",
     "@testing-library/dom": "^8.11.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -11,6 +13,7 @@
     "bee-queue": "^1.4.0",
     "date-fns": "^2.0.0-beta.5",
     "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
     "express-handlebars": "3.1.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.2",
@@ -24,6 +27,7 @@
     "react-scripts": "^0.9.5",
     "sequelize": "^6.12.0-beta.2",
     "web-vitals": "^1.0.1",
+    "youch": "^3.0.0",
     "yup": "^0.32.11"
   },
   "scripts": {
